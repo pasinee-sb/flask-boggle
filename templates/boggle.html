@@ -1,0 +1,21 @@
+{%extends "base.html"%}
+
+{%block section%}
+
+<table>
+{%for row in boggle_game%}
+<tr>
+<td><div>{{row[0]}}</div></td>
+<td><div>{{row[1]}}</div></td>
+<td><div>{{row[2]}}</div></td>
+<td><div>{{row[3]}}</div></td>
+<td><div>{{row[4]}}</div></td>
+</tr>
+{%endfor%}
+</table>
+
+<form action="/guessed" method="get" >
+    <input type="text" name="word" id="word" placeholder="guess the word!">
+    <button  >Submit </button>
+</form>
+{%endblock%}
