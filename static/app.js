@@ -10,6 +10,9 @@ let final_score
 let $word 
 let setOfWords = []
 
+//set the timer to countdown from 30 seconds to 0 (run countdown every 1000 millisecond)
+//when time is up, show text time is up and remove the form, send the score to check if it is the highest score to backend
+
 const timer = ()=> {
     let handle_time = setInterval(()=>{
         if (sec>0) {
@@ -76,7 +79,7 @@ const checkAndUpdate = (res)=> {
 }
 
 const setHighScore= async (newScore)=>{
-    console.log(BASE_URL, newScore, typeof newScore);
+    
      let data = await axios.post(`${BASE_URL}check-score`,{"score": newScore})
   
 }
