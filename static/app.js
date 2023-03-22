@@ -19,10 +19,11 @@ const timer = ()=> {
         else {
             clearInterval(handle_time);
             $form.remove();
-
+            $("#tell_time").text("TIME IS UP!")
             final_score = score
          
             setHighScore(final_score)
+
 
         }
     }, 1000)

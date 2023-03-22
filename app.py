@@ -1,5 +1,4 @@
-from flask import Flask, request, render_template, redirect, session, jsonify, app
-from datetime import timedelta
+from flask import Flask, request, render_template, session, jsonify, app
 from flask_debugtoolbar import DebugToolbarExtension
 from boggle import Boggle
 
