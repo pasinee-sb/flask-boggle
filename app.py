@@ -11,13 +11,7 @@ debug = DebugToolbarExtension(app)
 
 
 my_board = Boggle()
-
-
-# @app.before_first_request  # runs before FIRST request (only once)
-# def make_session_permanent():
-#     session.permanent = True
-#     app.permanent_session_lifetime = timedelta(minutes=5)
-#     session.modified = True
+set_of_word = []
 
 
 @app.route('/', methods=["GET"])
@@ -39,8 +33,16 @@ def fetch_guessed():
 
     guessed_word = request.args["word"]
 
-    res = my_board.check_valid_word(board, guessed_word)
-    return jsonify(result=res)
+    """Check for duplicate word, if not, move on to check valid word"""
+
+    if guessed_word not in set_of_word:
+        set_of_word.append(guessed_word)
+
+        res = my_board.check_valid_word(board, guessed_word)
+        return jsonify(result=res)
+
+    else:
+        return ("", 204)
 
 
 @app.route("/check-score", methods=['POST'])
