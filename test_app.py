@@ -3,12 +3,6 @@ from app import app
 from flask import session
 from boggle import Boggle
 
-# # Make Flask errors be real errors, not HTML pages with error info
-# app.config['TESTING'] = True
-
-# # This is a bit of hack, but don't use Flask DebugToolbar
-# app.config['DEBUG_TB_HOSTS'] = ['dont-show-debug-toolbar']
-
 
 class FlaskTests(TestCase):
 
@@ -24,10 +18,16 @@ class FlaskTests(TestCase):
         """Make sure information is in the session and HTML is displayed"""
 
         with self.client:
+
             response = self.client.get('/')
+            # import pdb
+            # pdb.set_trace()
             self.assertIn('board', session)
             self.assertIsNone(session.get('high-score'))
             self.assertIsNone(session.get('times-played'))
+            html = response.get_data(as_text=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn('<p id="score">My Score: </p>', html)
 
     def test_valid_word(self):
         """Test if word is valid by modifying the board in the session"""
