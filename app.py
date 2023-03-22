@@ -27,11 +27,8 @@ def show_home():
 
     session['board'] = boggle_board
     times_played = session.get('times-played', 0)
-    high_score = session.get("high_score", 0)
-
-    print(f"boggle_game : {boggle_board}")
-    # print(f"session : {session['board']}")
-
+    high_score = session.get("high-score", 0)
+    print("high score: ", high_score)
     return render_template("boggle.html", boggle_game=boggle_board, high_score=high_score, times_played=times_played)
 
 
@@ -46,11 +43,11 @@ def fetch_guessed():
     return jsonify(result=res)
 
 
-@app.route('/check-score')
-def new_high():
+@app.route("/check-score", methods=['POST'])
+def new_high_score():
     high_score = session.get('high-score', 0)
     times_played = session.get('times-played', 0)
-    score = request.args['score']
+    score = request.json["score"]
 
     if score > high_score:
         high_score = score
@@ -59,4 +56,5 @@ def new_high():
     result = session['high-score']
     session['times-played'] = times_played + 1
 
+    print(result)
     return jsonify(high_score=result)
