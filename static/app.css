@@ -21,7 +21,8 @@
 table {
     width: var(--table-size);
     height: var(--table-size);
-    margin: 5% auto;
+    margin-left: auto;
+    margin-right: auto;
     border-collapse: collapse;
     font-size: var(--font-size);
 }
